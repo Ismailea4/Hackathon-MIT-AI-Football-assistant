@@ -7,7 +7,7 @@ import { VideoData, ChatMessage, FootballStats } from './types';
 import { mockStats, mockMessages, mockTeams } from './utils/mockData';
 import { ElevenLabsService, WebSpeechService } from './services/elevenLabsService';
 import { BackendService, MockBackendService } from './services/backendService';
-import { Activity, Zap, Target } from 'lucide-react';
+import { Activity, Zap, Target, MessageCircle, X, Settings } from 'lucide-react';
 
 function App() {
   // State management
@@ -17,6 +17,8 @@ function App() {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [showVoiceControls, setShowVoiceControls] = useState(false);
 
   // Services
   const backendService = new MockBackendService(); // Switch to BackendService for production
@@ -153,6 +155,11 @@ function App() {
     setIsSpeaking(!isSpeaking);
   };
 
+  // Add toggle chat function
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+  };
+
   return (
     <div className="min-h-screen bg-navy-900">
       {/* Header */}
@@ -164,7 +171,7 @@ function App() {
                 <img
                     src="/logo-hack.jpg"
                     alt="Logo"
-                    className="w-28 h-28 object-contain"
+                    className="w-24 h-24 object-contain"
                   />
               </div>
               <div>
@@ -190,34 +197,66 @@ function App() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-6">
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-140px)]">
-          {/* Left Column - Video and Voice Controls */}
-          <div className="space-y-6">
-            <div className="h-2/3">
-              <VideoUploader onVideoUpload={handleVideoUpload} />
+        {/* Main Content */}
+        <div className="flex gap-6">
+          {/* Left Column - Video and Live Composition */}
+          <div className="flex-grow space-y-6">
+            {/* Video Section */}
+            <div className="relative">
+              <div className="w-full aspect-video bg-navy-800 rounded-lg overflow-hidden relative">
+                <VideoUploader onVideoUpload={handleVideoUpload} />
+                {/* Voice Controls Button */}
+                <button
+                  onClick={() => setShowVoiceControls(!showVoiceControls)}
+                  className="absolute bottom-3 right-3 z-20 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-colors"
+                  title="Voice Controls"
+                >
+                  <Settings className="w-5 h-5 text-navy-800" />
+                </button>
+                
+                {/* Voice Controls Popover */}
+                {showVoiceControls && (
+                  <div className="absolute bottom-14 right-3 z-30 flex space-x-3">
+                    <div className="bg-white rounded-lg shadow-xl w-60">
+                      <VoiceControls
+                        isListening={isListening}
+                        isSpeaking={isSpeaking}
+                        onToggleListening={handleToggleListening}
+                        onToggleSpeaking={handleToggleSpeaking}
+                        compact
+                        onClose={() => setShowVoiceControls(false)}
+                      />
+                    </div>
+                    <div className="bg-white rounded-lg shadow-xl w-60">
+                      <VoiceControls
+                        isListening={isListening}
+                        isSpeaking={isSpeaking}
+                        onToggleListening={handleToggleListening}
+                        onToggleSpeaking={handleToggleSpeaking}
+                        compact
+                        settingsOnly
+                        onClose={() => setShowVoiceControls(false)}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="h-1/3">
-              <VoiceControls
-                isListening={isListening}
-                isSpeaking={isSpeaking}
-                onToggleListening={handleToggleListening}
-                onToggleSpeaking={handleToggleSpeaking}
-              />
+
+            {/* Live Composition Panel - Directly below video */}
+            <div className="bg-navy-800 rounded-lg p-4">
+              <h2 className="text-xl font-bold text-white mb-4">Live Team Composition</h2>
+              <div className="aspect-[16/9] bg-football-green-900/30 rounded-lg p-4">
+                {/* Placeholder for live composition - To be implemented later */}
+                <div className="flex items-center justify-center h-full">
+                  <p className="text-gray-400">Team composition visualization will be displayed here</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Center Column - Chat */}
-          <div className="h-full">
-            <ChatWindow
-              messages={messages}
-              onSendMessage={handleSendMessage}
-              onVoiceInput={handleVoiceInput}
-            />
-          </div>
-
-          {/* Right Column - Stats */}
-          <div className="h-full">
+          {/* Right Column - Stats Panel */}
+          <div className="w-1/3 flex-shrink-0">
             <StatsPanel
               stats={stats}
               homeTeam={mockTeams.home.name}
@@ -235,6 +274,26 @@ function App() {
           </p>
         </div>
       </div>
+
+      {/* Floating Chat Button and Window - fixed to bottom right of page */}
+      <button
+        onClick={toggleChat}
+        className="fixed bottom-6 right-6 z-50 bg-football-green-500 p-3 rounded-full shadow-lg hover:bg-football-green-600 transition-colors"
+        style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.25)' }}
+      >
+        {isChatOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
+      </button>
+      {isChatOpen && (
+        <div className="fixed bottom-24 right-6 w-96 h-[400px] bg-navy-800 rounded-lg shadow-xl border border-navy-700 z-50 flex flex-col"
+          style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.35)' }}
+        >
+          <ChatWindow
+            messages={messages}
+            onSendMessage={handleSendMessage}
+            onVoiceInput={handleVoiceInput}
+          />
+        </div>
+      )}
     </div>
   );
 }
