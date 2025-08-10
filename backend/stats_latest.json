@@ -1,0 +1,19 @@
+{
+  "passes": {
+    "TeamA": 37,
+    "TeamB": 37
+  },
+  "possession_seconds": {
+    "TeamA": 9.259249999999913,
+    "TeamB": 4.462791666666675
+  },
+  "possession_percent": {
+    "TeamA": 67.47720364741618,
+    "TeamB": 32.52279635258383
+  },
+  "goals": {
+    "TeamA": 10,
+    "TeamB": 0
+  },
+  "current_owner_team": "TeamA"
+}
