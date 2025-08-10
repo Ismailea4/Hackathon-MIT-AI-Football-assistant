@@ -1,0 +1,9 @@
+fastapi==0.68.0
+uvicorn==0.15.0
+python-multipart==0.0.5
+ultralytics==8.0.145
+opencv-python==4.7.0.72
+numpy==1.24.3
+pydantic==1.10.8
+python-jose==3.3.0
+websockets==10.4
