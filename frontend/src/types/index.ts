@@ -36,3 +36,16 @@ export interface VideoData {
   duration: number;
   currentTime: number;
 }
+
+export interface Player {
+  id: number;
+  team: 'home' | 'away';
+  x: number;
+  y: number;
+  number: number;
+}
+
+export interface TeamFormation {
+  home: Player[];
+  away: Player[];
+}

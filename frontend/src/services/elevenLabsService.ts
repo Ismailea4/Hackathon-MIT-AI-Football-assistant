@@ -8,7 +8,7 @@ export class ElevenLabsService {
   }
 
   // Text-to-Speech using ElevenLabs
-  async textToSpeech(text: string, voiceId: string = 'pNInz6obpgDQGcFmaJgB'): Promise<Blob> {
+  async textToSpeech(text: string, voiceId: string = 'jsCqWAovK2LkecY7zXl4'): Promise<Blob> {
     const response = await fetch(`${this.baseUrl}/text-to-speech/${voiceId}`, {
       method: 'POST',
       headers: {

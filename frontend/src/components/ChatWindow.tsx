@@ -6,12 +6,16 @@ interface ChatWindowProps {
   messages: ChatMessage[];
   onSendMessage: (text: string) => void;
   onVoiceInput: (audioBlob: Blob) => void;
+  isSpeakingEnabled: boolean;
+  onToggleSpeaking: () => void;
 }
 
 export const ChatWindow: React.FC<ChatWindowProps> = ({ 
   messages, 
   onSendMessage, 
-  onVoiceInput 
+  onVoiceInput,
+  isSpeakingEnabled,
+  onToggleSpeaking
 }) => {
   const [inputText, setInputText] = useState('');
   const [isRecording, setIsRecording] = useState(false);
@@ -98,8 +102,27 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
   return (
     <div className="data-card flex flex-col h-full">
       <div className="p-4 border-b border-gray-200/50">
-        <h2 className="text-xl font-bold text-navy-900 tracking-tight">AI Analysis Chat</h2>
-        <p className="text-sm text-gray-600 font-medium">Ask questions about tactics, formations, and strategy</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-navy-900 tracking-tight">AI Analysis Chat</h2>
+            <p className="text-sm text-gray-600 font-medium">Ask questions about tactics, formations, and strategy</p>
+          </div>
+          <button
+            onClick={onToggleSpeaking}
+            className={`p-2 rounded-lg transition-colors ${
+              isSpeakingEnabled
+                ? 'bg-football-green-500 text-white hover:bg-football-green-600'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+            title={isSpeakingEnabled ? 'Disable voice output' : 'Enable voice output'}
+          >
+            {isSpeakingEnabled ? (
+              <Volume2 className="w-5 h-5" />
+            ) : (
+              <VolumeX className="w-5 h-5" />
+            )}
+          </button>
+        </div>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">

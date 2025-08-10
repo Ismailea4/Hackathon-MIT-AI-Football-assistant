@@ -33,6 +33,54 @@ export const mockMessages: ChatMessage[] = [
 
 // Mock team data
 export const mockTeams = {
-  home: { name: 'Arsenal', color: '#DC2626' },
-  away: { name: 'Chelsea', color: '#2563EB' }
+  home: { name: 'Team A', color: '#2563EB' },
+  away: { name: 'Team B', color: '#DC2626' }
+};
+
+// Tactical analysis based on stats
+export const generateAnalysis = (stats: FootballStats): string[] => {
+  const analysis: string[] = [];
+  
+  // Possession analysis
+  if (stats.possession.home > 60) {
+    analysis.push("Team A is dominating possession, controlling the game's tempo");
+  } else if (stats.possession.away > 60) {
+    analysis.push("Team B is controlling possession, dictating the pace");
+  } else {
+    analysis.push("Possession is evenly contested between both teams");
+  }
+
+  // Shot efficiency analysis
+  const homeEfficiency = (stats.shots.home / (stats.possession.home / 100)).toFixed(2);
+  const awayEfficiency = (stats.shots.away / (stats.possession.away / 100)).toFixed(2);
+  if (Number(homeEfficiency) > Number(awayEfficiency)) {
+    analysis.push("Team A is creating more chances relative to their possession");
+  } else if (Number(awayEfficiency) > Number(homeEfficiency)) {
+    analysis.push("Team B is showing clinical efficiency with their chances");
+  }
+
+  // Pass accuracy insights
+  if (stats.passAccuracy.home > 85) {
+    analysis.push("Team A's high passing accuracy indicates excellent build-up play");
+  }
+  if (stats.passAccuracy.away > 85) {
+    analysis.push("Team B is displaying impressive passing precision");
+  }
+
+  // Set piece potential
+  if (stats.corners.home > stats.corners.away + 3) {
+    analysis.push("Team A is creating pressure through set-pieces");
+  } else if (stats.corners.away > stats.corners.home + 3) {
+    analysis.push("Team B is threatening from set-piece situations");
+  }
+
+  // Game intensity
+  const totalFouls = stats.fouls.home + stats.fouls.away;
+  if (totalFouls > 20) {
+    analysis.push("High-intensity contest with frequent tactical fouls");
+  } else if (totalFouls < 10) {
+    analysis.push("Clean, tactical game with minimal disruptions");
+  }
+
+  return analysis;
 };

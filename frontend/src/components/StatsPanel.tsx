@@ -1,6 +1,7 @@
 import React from 'react';
-import { TrendingUp, Target, Users, Flag, AlertTriangle } from 'lucide-react';
+import { TrendingUp, Target, Users, Flag, AlertTriangle, ChevronRight } from 'lucide-react';
 import { FootballStats } from '../types';
+import { generateAnalysis } from '../utils/mockData';
 
 interface StatsPanelProps {
   stats: FootballStats;
@@ -149,14 +150,21 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ stats, homeTeam, awayTea
         />
       </div>
 
-      <div className="mt-6 p-4 bg-football-green-500/10 rounded-lg border border-football-green-500/20">
-        <div className="flex items-center space-x-2 mb-2">
+      <div className="mt-6 p-4 bg-navy-800 rounded-lg border border-navy-700">
+        <div className="flex items-center space-x-2 mb-3">
           <div className="w-2 h-2 bg-football-green-500 rounded-full animate-pulse"></div>
-          <span className="text-sm font-semibold text-football-green-600 tracking-tight">Live Analysis</span>
+          <span className="text-sm font-semibold text-white tracking-tight">Live Analysis</span>
         </div>
-        <p className="text-sm text-football-green-700 font-medium">
-          {homeTeam} is dominating possession but {awayTeam} has been more clinical with their chances.
-        </p>
+        <div className="space-y-2">
+          {generateAnalysis(stats).map((analysis, index) => (
+            <div key={index} className="flex items-start space-x-2 text-sm">
+              <ChevronRight className="w-4 h-4 text-football-green-500 mt-0.5 flex-shrink-0" />
+              <p className="text-gray-300 font-medium leading-tight">
+                {analysis}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
