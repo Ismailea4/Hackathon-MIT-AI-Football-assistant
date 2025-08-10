@@ -1,82 +1,5 @@
 <p align="center">
-  <img src="assets/logo-hack.jpg" alt="Project Log## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 16+
-- Python 3.8+
-- Git
-
-### Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/Ismailea4/Hackathon-MIT-AI-Football-assistant.git
-cd Hackathon-MIT-AI-Football-assistant
-```
-
-2. Install backend dependencies:
-
-```bash
-cd backend
-python -m pip install -r requirements.txt
-```
-
-3. Install frontend dependencies:
-
-```bash
-cd ../frontend
-npm install
-```
-
-### Running the Application
-
-1. Start the backend server:
-
-```bash
-cd backend
-python -m uvicorn api:app --reload
-```
-
-2. Start the frontend development server:
-
-```bash
-cd frontend
-npm run dev
-```
-
-Or run both simultaneously:
-
-```bash
-cd frontend
-npm start
-```
-
-The application will be available at:
-
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:8000
-
-## 📂 Project Structure
-
-````
-.
-├── assets/                # Static assets (images, logos)
-├── backend/
-│   ├── api.py            # FastAPI backend server
-│   ├── run.py            # Video processing script
-│   ├── video_processor.py # Core analysis engine
-│   └── requirements.txt   # Python dependencies
-├── frontend/
-│   ├── src/
-│   │   ├── components/   # React components
-│   │   ├── services/     # API integration
-│   │   ├── types/        # TypeScript types
-│   │   └── utils/        # Utility functions
-│   └── package.json      # Node.js dependencies
-└── README.md             # Project documentation
-```00"/>
+  <img src="assets/logo-hack.jpg" alt="Project Logo" width="200"/>
 </p>
 
 <h1 align="center">⚽ AI Football Strategy & Analysis Assistant</h1>
@@ -84,6 +7,30 @@ The application will be available at:
 <p align="center"><em>"In football, the worst blindness is only seeing the ball." – Nelson Falcão Rodrigues</em></p>
 
 ---
+
+## 📌 Overview
+The **AI Football Strategy & Analysis Assistant** is a conversational tool designed for football coaches and analysts.  
+It processes match footage, extracts performance insights, and provides tactical recommendations in real time — all through natural voice interaction.
+
+Built for the **ElevenLabs AI Sports Coach Challenge**, our goal is to **bring professional-grade match analysis to every coach**, everywhere.
+
+---
+
+## 🚀 Features (MVP)
+- **🎥 Video Analysis** — Detects and tracks players from match clips.
+- **📊 Key Match Stats** — Possession, passes, shots, goals, and more.
+- **🗣 Conversational Insights** — Ask questions and get real-time answers via ElevenLabs AI voice.
+- **📌 Tactical Recommendations** — Suggests improvements based on match data.
+- *(Optional)* Annotated clips with highlights.
+
+---
+
+## 🛠 Tech Stack
+- **Frontend:** React Native / Web (for chat, video upload, stats display)
+- **Backend:** Python (FastAPI/Flask) + OpenCV + YOLOv8
+- **AI/Voice:** ElevenLabs Conversational AI + GPT API
+- **Data:** Video footage (MP4), extracted JSON stats
+
 
 ## 📌 Overview
 The **AI Football Strategy & Analysis Assistant** is a conversational tool designed for football coaches and analysts.
@@ -167,17 +114,87 @@ Built for the **ElevenLabs AI Sports Coach Challenge**, our goal is to **bring p
 
 ---
 
-## 📂 Repository Structure
-````
 
+### Prerequisites
+
+- Node.js 16+
+- Python 3.8+
+- Git
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Ismailea4/Hackathon-MIT-AI-Football-assistant.git
+cd Hackathon-MIT-AI-Football-assistant
+```
+
+2. Install backend dependencies:
+
+```bash
+cd backend
+python -m pip install -r requirements.txt
+```
+
+3. Install frontend dependencies:
+
+```bash
+cd ../frontend
+npm install
+```
+
+### Running the Application
+
+1. Start the backend server:
+
+```bash
+cd backend
+python -m uvicorn api:app --reload
+```
+
+2. Start the frontend development server:
+
+```bash
+cd frontend
+npm run dev
+```
+
+Or run both simultaneously:
+
+```bash
+cd frontend
+npm start
+```
+
+The application will be available at:
+
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:8000
+
+---
+
+## 📂 Project Structure
+
+````
 .
-├── assets/ # Images, logo, UI mockups
-├── backend/ # Video processing, AI analysis scripts
-├── frontend/ # UI components & integration
-├── README.md # Project documentation
-└── requirements.txt # Python dependencies
-
+├── assets/                # Static assets (images, logos)
+├── backend/
+│   ├── api.py            # FastAPI backend server
+│   ├── run.py            # Video processing script
+│   ├── video_processor.py # Core analysis engine
+│   └── requirements.txt   # Python dependencies
+├── frontend/
+│   ├── src/
+│   │   ├── components/   # React components
+│   │   ├── services/     # API integration
+│   │   ├── types/        # TypeScript types
+│   │   └── utils/        # Utility functions
+│   └── package.json      # Node.js dependencies
+└── README.md             # Project documentation
 ````
+
+---
 
 ## 🎯 Usage Guide
 
@@ -226,6 +243,8 @@ MODEL_PATH=yolov8n.pt
 UPLOAD_DIR=uploads
 DEBUG=False
 ```
+
+
 
 ## 💡 Inspiration
 
