@@ -145,6 +145,28 @@ Built for the **ElevenLabs AI Sports Coach Challenge**, our goal is to **bring p
 
 ---
 
+## 🧰 Tools & Technologies
+
+### [Frontend](./frontend)
+- [React](https://react.dev/) & [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Radix UI](https://www.radix-ui.com/)
+- [Lucide Icons](https://lucide.dev/)
+- [Axios](https://axios-http.com/)
+- [WebSpeech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+
+### [Backend](./backend)
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [OpenCV](https://opencv.org/)
+- [YOLOv8 (Ultralytics)](https://docs.ultralytics.com/)
+- [NumPy](https://numpy.org/)
+- [Python Multipart](https://andrew-d.github.io/python-multipart/)
+- [Uvicorn](https://www.uvicorn.org/)
+- [ElevenLabs API](https://elevenlabs.io/)
+
+---
+
 ## 📂 Repository Structure
 ````
 

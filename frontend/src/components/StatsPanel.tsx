@@ -1,5 +1,15 @@
 import React from 'react';
-import { TrendingUp, Target, Users, Flag, AlertTriangle, ChevronRight } from 'lucide-react';
+import { 
+  TrendingUp, 
+  Target, 
+  Users, 
+  Flag, 
+  AlertTriangle, 
+  ChevronRight,
+  Layout,
+  Clock,
+  Activity
+} from 'lucide-react';
 import { FootballStats } from '../types';
 import { generateAnalysis } from '../utils/mockData';
 
@@ -100,6 +110,28 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ stats, homeTeam, awayTea
           </div>
         </div>
       </div>
+
+      {/* Formation Display */}
+      {stats.formations && (
+        <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-100">
+          <div className="flex items-center space-x-2 mb-3">
+            <Layout className="w-5 h-5 text-football-green-500" />
+            <span className="font-semibold text-navy-800">Formations</span>
+          </div>
+          <div className="flex justify-between">
+            <div className="text-center">
+              <span className="text-2xl font-bold" style={{ color: homeColor }}>
+                {stats.formations.home}
+              </span>
+            </div>
+            <div className="text-center">
+              <span className="text-2xl font-bold" style={{ color: awayColor }}>
+                {stats.formations.away}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="space-y-4">
         <StatItem
