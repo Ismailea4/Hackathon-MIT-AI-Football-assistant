@@ -22,8 +22,10 @@ function App() {
   const [showVoiceControls, setShowVoiceControls] = useState(false);
 
   // Services
+  const elevenLabsApiKey = ''; // <-- Put your ElevenLabs API key here
+
   const backendService = new MockBackendService(); // Switch to BackendService for production
-  const elevenLabsService = new ElevenLabsService('sk_bc663e06897d17d21ef261e84f8d3c94499e234e07bae884'); // Replace with your actual API key
+  const elevenLabsService = new ElevenLabsService(elevenLabsApiKey); // Replace with your actual API key
   const webSpeechService = new WebSpeechService(); // For speech recognition only
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
 

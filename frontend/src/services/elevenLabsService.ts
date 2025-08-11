@@ -3,28 +3,42 @@ export class ElevenLabsService {
   private apiKey: string;
   private baseUrl = 'https://api.elevenlabs.io/v1';
 
+  /**
+   * @param apiKey - Your ElevenLabs API key. Leave empty to use the default demo voice.
+   * Example: new ElevenLabsService('YOUR_ELEVENLABS_API_KEY')
+   */
   constructor(apiKey: string) {
     this.apiKey = apiKey;
   }
 
   // Text-to-Speech using ElevenLabs
-  async textToSpeech(text: string, voiceId: string = 'jsCqWAovK2LkecY7zXl4'): Promise<Blob> {
-    const response = await fetch(`${this.baseUrl}/text-to-speech/${voiceId}`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'audio/mpeg',
-        'Content-Type': 'application/json',
-        'xi-api-key': this.apiKey
-      },
-      body: JSON.stringify({
-        text,
-        model_id: 'eleven_monolingual_v1',
-        voice_settings: {
-          stability: 0.5,
-          similarity_boost: 0.5
-        }
-      })
-    });
+  async textToSpeech(
+    text: string,
+    voiceId: string = 'jsCqWAovK2LkecY7zXl4'
+  ): Promise<Blob> {
+    // If no API key is provided, always use the James voice (ZQe5CZNOzWyzPSCn5a3c)
+    const effectiveVoiceId =
+      !this.apiKey ? 'ZQe5CZNOzWyzPSCn5a3c' : voiceId;
+
+    const response = await fetch(
+      `${this.baseUrl}/text-to-speech/${effectiveVoiceId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'audio/mpeg',
+          'Content-Type': 'application/json',
+          'xi-api-key': this.apiKey
+        },
+        body: JSON.stringify({
+          text,
+          model_id: 'eleven_monolingual_v1',
+          voice_settings: {
+            stability: 0.5,
+            similarity_boost: 0.5
+          }
+        })
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`ElevenLabs TTS error: ${response.statusText}`);
